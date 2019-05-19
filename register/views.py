@@ -4,6 +4,7 @@ from quiz.models import Quiz
 from quiz.serializers import QuizSerializer
 from .serializers import UserSerializer, WrongSerializer, BookmarkSerializer
 from rest_framework.response import Response
+from rest_framework.generics import DestroyAPIView
 
 
 class UserViewSet(ModelViewSet):
@@ -41,6 +42,11 @@ class WrongViewSet(ModelViewSet):
             serializer.save()
 
 
+class WrongDelete(DestroyAPIView):
+    queryset = Wrong.objects.all()
+    serializer_class = WrongSerializer
+
+
 class WrongDetail(ReadOnlyModelViewSet):
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer
@@ -73,3 +79,8 @@ class BookmarkViewSet(ModelViewSet):
             return Response(status=300)
         else:
             serializer.save()
+
+
+class BookmarkDelete(DestroyAPIView):
+    queryset = Bookmark.objects.all()
+    serializer_class = BookmarkSerializer

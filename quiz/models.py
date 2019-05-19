@@ -17,3 +17,6 @@ class Quiz(models.Model):
 
     class Meta:
         ordering = ('subject',)
+
+
+
